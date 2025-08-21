@@ -1,0 +1,63 @@
+/* CSS Variables and Theme Configuration */
+:root {
+    /* Xero Light Theme Colors */
+    --xero-blue: #1976d2;
+    --xero-blue-dark: #1565c0;
+    --xero-blue-light: #42a5f5;
+    --xero-accent: #13b5ea;
+    --xero-success: #4caf50;
+    --xero-warning: #ff9800;
+    --xero-error: #f44336;
+    --xero-bg: linear-gradient(-45deg, #e3f2fd 0%, #bbdefb 16%, #90caf9 32%, #64b5f6 48%, #42a5f5 64%, #2196f3 80%, #1976d2 100%);
+    --xero-bg-size: 400% 400%;
+    --xero-surface: #ffffff;
+    --xero-text-primary: #2c3e50;
+    --xero-text-secondary: #546e7a;
+    --xero-border: #a5d4eadf;
+    --xero-shadow: rgba(0, 0, 0, 0.08);
+    
+    /* Conic gradient colors for light theme */
+    --conic-color-1: #1976d2;
+    --conic-color-2: #42a5f5;
+    --conic-color-3: #64b5f6;
+    --conic-color-4: #1976d2;
+}
+
+[data-theme="dark"] {
+    /* Xero Dark Theme Colors */
+    --xero-blue: #2196f3;
+    --xero-blue-dark: #1976d2;
+    --xero-blue-light: #64b5f6;
+    --xero-accent: #29b6f6;
+    --xero-success: #66bb6a;
+    --xero-warning: #ffb74d;
+    --xero-error: #ef5350;
+    --xero-bg: linear-gradient(-45deg, #0d1421 0%, #1a2332 16%, #263447 32%, #1e2a3a 48%, #2196f3 64%, #1a2332 80%, #0d1421 100%);
+    --xero-surface: #1e2a3a;
+    --xero-text-primary: #ffffff;
+    --xero-text-secondary: #b0bec5;
+    --xero-border: #2196f3;
+    --xero-shadow: rgba(0, 0, 0, 0.3);
+    
+    /* Conic gradient colors for dark theme - darker, more muted */
+    --conic-color-1: #0d1421;
+    --conic-color-2: #1a2332;
+    --conic-color-3: #263447;
+    --conic-color-4: #0d1421;
+}
+
+/* Anim
+ated Gradient Keyframes */
+@keyframes gradientShift {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
+}

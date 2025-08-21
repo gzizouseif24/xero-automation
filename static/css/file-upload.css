@@ -1,0 +1,43 @@
+/* File Upload Components */
+.file-upload {
+    border: 2px dashed var(--xero-blue);
+    border-radius: 8px;
+    padding: 20px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-bottom: 16px;
+    background: var(--xero-surface);
+    width: 100%;
+}
+
+.file-upload:hover {
+    background: rgba(25, 118, 210, 0.05);
+    border-color: var(--xero-blue-dark);
+}
+
+.file-upload.dragover {
+    background: rgba(25, 118, 210, 0.1);
+    border-color: var(--xero-blue-dark);
+    transform: scale(1.02);
+}
+
+.file-list {
+    margin-top: 20px;
+}
+
+.file-item {
+    background: var(--xero-surface);
+    padding: 12px 16px;
+    border-radius: 6px;
+    margin-bottom: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border: 1px solid var(--xero-border);
+    transition: all 0.2s ease;
+}
+
+.file-item:hover {
+    box-shadow: 0 2px 8px var(--xero-shadow);
+}

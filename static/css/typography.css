@@ -1,0 +1,49 @@
+/* Typography Styles */
+h1 {
+    color: var(--xero-text-primary);
+    margin-bottom: 8px;
+    font-size: 3em;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+    text-align: center;
+}
+
+h2 {
+    color: var(--xero-text-primary);
+    font-size: 1.5em;
+    font-weight: 600;
+    margin-bottom: 16px;
+}
+
+.subtitle {
+    color: var(--xero-text-secondary);
+    margin-bottom: 0;
+    font-size: 1.1em;
+    font-weight: 400;
+}
+
+.xero-logo {
+    height: 95px;
+    width: auto;
+    object-fit: contain;
+    filter: brightness(1);
+    transition: filter 0.3s ease;
+}
+
+[data-theme="dark"] .xero-logo {
+    filter: brightness(1.2) contrast(1.1);
+}/* 
+Gradient Text Effect */
+.gradient-text {
+    background: linear-gradient(90deg, #1976d2, #42a5f5, #64b5f6);
+    background-size: 200% 200%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: textShift 5s ease infinite alternate;
+}
+
+@keyframes textShift {
+    from { background-position: 0% 50%; }
+    to { background-position: 100% 50%; }
+}

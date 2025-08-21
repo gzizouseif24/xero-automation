@@ -1,0 +1,32 @@
+/* Alert Components */
+.alert {
+    padding: 16px;
+    border-radius: 6px;
+    margin-bottom: 16px;
+    border: 1px solid;
+    font-weight: 500;
+}
+
+.alert-warning {
+    background: rgba(255, 152, 0, 0.1);
+    color: var(--xero-warning);
+    border-color: var(--xero-warning);
+}
+
+.alert-error {
+    background: rgba(244, 67, 54, 0.1);
+    color: var(--xero-error);
+    border-color: var(--xero-error);
+}
+
+.alert-success {
+    background: rgba(76, 175, 80, 0.1);
+    color: var(--xero-success);
+    border-color: var(--xero-success);
+}
+
+.alert-info {
+    background: rgba(25, 118, 210, 0.1);
+    color: var(--xero-blue);
+    border-color: var(--xero-blue);
+}

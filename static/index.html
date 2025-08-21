@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Xero Payroll Automation</title>
+    <!-- Modular CSS Files -->
+    <link rel="stylesheet" href="/static/css/variables.css">
+    <link rel="stylesheet" href="/static/css/base.css">
+    <link rel="stylesheet" href="/static/css/typography.css">
+    <link rel="stylesheet" href="/static/css/layout.css">
+    <link rel="stylesheet" href="/static/css/components.css">
+    <link rel="stylesheet" href="/static/css/alerts.css">
+    <link rel="stylesheet" href="/static/css/file-upload.css">
+    <link rel="stylesheet" href="/static/css/modal.css">
+    <link rel="stylesheet" href="/static/css/settings.css">
+    <link rel="stylesheet" href="/static/css/forms.css">
+    <link rel="stylesheet" href="/static/css/tables.css">
+    <link rel="stylesheet" href="/static/css/progress.css">
+    <link rel="stylesheet" href="/static/css/responsive.css">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="header-logo">
+                <img src="/static/Xero_software_logo.png" alt="Xero" class="xero-logo">
+            </div>
+            <div class="header-content">
+                <h1>Payroll Automation</h1>
+                <p class="subtitle">Streamline your payroll process with automated timesheet processing</p>
+            </div>
+            <div class="header-buttons">
+                <button class="theme-toggle" onclick="toggleTheme()" title="Toggle Dark Mode">
+                    <i class="fas fa-moon"></i>
+                </button>
+                <button class="settings-btn" onclick="openSettingsModal()" title="Settings">
+                    <i class="fas fa-cog"></i> Settings
+                </button>
+            </div>
+        </div>
+
+        <!-- Workflow Steps -->
+        <div class="workflow-steps">
+            <div class="step" id="step-1">
+                <div class="step-circle">1</div>
+                <div class="step-label">Connect</div>
+            </div>
+            <div class="step" id="step-2">
+                <div class="step-circle">2</div>
+                <div class="step-label">Upload</div>
+            </div>
+            <div class="step" id="step-3">
+                <div class="step-circle">3</div>
+                <div class="step-label">Validate</div>
+            </div>
+            <div class="step" id="step-4">
+                <div class="step-circle">4</div>
+                <div class="step-label">Consolidate</div>
+            </div>
+            <div class="step" id="step-5">
+                <div class="step-circle">5</div>
+                <div class="step-label">Submit</div>
+            </div>
+        </div>
+
+        <!-- Step Content -->
+        <div class="step-content" id="content-area">
+            <!-- Step 1: Connect -->
+            <div id="step-1-content">
+                <h2>Connect to Xero</h2>
+                <p style="margin: 20px 0;">Authenticate with your Xero account to begin the payroll automation process.
+                </p>
+
+                <div id="auth-status" style="margin: 20px 0;">
+                    <span>Status: </span>
+                    <span class="status-badge disconnected" id="connection-status">Not Connected</span>
+                    <span id="org-name" style="margin-left: 20px;"></span>
+                </div>
+
+                <button class="btn" onclick="connectToXero()">
+                    Connect to Xero
+                </button>
+                <button class="btn btn-secondary" onclick="checkAuthStatus()">
+                    Check Status
+                </button>
+            </div>
+
+            <!-- Step 2: Upload -->
+            <div id="step-2-content" class="hidden">
+                <h2>Upload Excel Files</h2>
+                <p style="margin: 20px 0;">Upload your timesheet Excel files or a ZIP archive containing multiple files.
+                </p>
+
+                <div class="file-upload" id="drop-zone" onclick="document.getElementById('file-input').click()">
+                    <svg width="50" height="50" viewBox="0 0 24 24" fill="none" stroke="#667eea" stroke-width="2">
+                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                        <polyline points="17 8 12 3 7 8"></polyline>
+                        <line x1="12" y1="3" x2="12" y2="15"></line>
+                    </svg>
+                    <p style="margin-top: 10px;">Drop files here or click to browse</p>
+                    <p style="font-size: 0.9em; color: #999;">Supports .xlsx, .xls, and .zip files</p>
+                </div>
+
+                <input type="file" id="file-input" multiple accept=".xlsx,.xls,.zip" style="display: none;"
+                    onchange="handleFileSelect(event)">
+
+                <div class="file-list" id="file-list"></div>
+
+                <button class="btn" onclick="uploadFiles()" id="upload-btn" disabled>
+                    Upload Files
+                </button>
+            </div>
+
+            <!-- Step 3: Validate -->
+            <div id="step-3-content" class="hidden">
+                <h2>Validate Data</h2>
+                <p style="margin: 20px 0;">Validating employee names and regions against Xero data...</p>
+
+                <div class="validation-results" id="validation-results"></div>
+
+                <button class="btn" onclick="validateData()">
+                    Validate Data
+                </button>
+                <button class="btn btn-secondary" onclick="proceedToConsolidate()">
+                    Continue with Valid Data
+                </button>
+            </div>
+
+            <!-- Step 4: Consolidate -->
+            <div id="step-4-content" class="hidden">
+                <h2>Consolidate Data</h2>
+                <p style="margin: 20px 0;">Consolidating timesheet data into final JSON format...</p>
+
+                <div id="consolidation-results"></div>
+
+                <button class="btn" onclick="consolidateData()">
+                    Consolidate Data
+                </button>
+                <button class="btn btn-secondary" onclick="downloadJSON()">
+                    Download JSON
+                </button>
+            </div>
+
+            <!-- Step 5: Submit -->
+            <div id="step-5-content" class="hidden">
+                <h2>Submit to Xero</h2>
+                <p style="margin: 20px 0;">Review and submit timesheets to Xero.</p>
+
+                <div class="alert alert-info">
+                    <strong>Important:</strong> Unknown regions will be excluded from submission.
+                    Please add missing regions in Xero before submitting.
+                </div>
+
+                <div id="submission-summary"></div>
+
+                <button class="btn btn-success" onclick="submitTimesheets(false)">
+                    Submit Timesheets
+                </button>
+                <button class="btn" onclick="submitTimesheets(true)">
+                    Dry Run (Test Only)
+                </button>
+            </div>
+        </div>
+
+        <!-- Results Area -->
+        <div id="results-area" class="hidden">
+            <div class="progress-bar">
+                <div class="progress-fill" id="progress-bar" style="width: 0%">0%</div>
+            </div>
+            <div id="results-content"></div>
+        </div>
+    </div>
+
+    <!-- Settings Modal -->
+    <div id="settings-modal" class="modal hidden">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2><i class="fas fa-cog"></i> Application Settings</h2>
+                <button class="modal-close" onclick="closeSettingsModal()"><i class="fas fa-times"></i></button>
+            </div>
+
+            <div class="modal-body">
+                <p style="margin-bottom: 20px;">Configure application behavior and processing parameters.</p>
+
+                <!-- Settings Tabs -->
+                <div class="settings-tabs">
+                    <button class="tab-btn active" onclick="showSettingsTab('xero_api')">Xero API</button>
+                    <button class="tab-btn" onclick="showSettingsTab('file_processing')">File Processing</button>
+                    <button class="tab-btn" onclick="showSettingsTab('employee_matching')">Employee Matching</button>
+                    <button class="tab-btn" onclick="showSettingsTab('hour_types')">Hour Types</button>
+                    <button class="tab-btn" onclick="showSettingsTab('parser_config')">Parser Config</button>
+                    <button class="tab-btn" onclick="showSettingsTab('api_settings')">API Settings</button>
+                </div>
+
+                <!-- Settings Content -->
+                <div class="settings-content" id="settings-content">
+                    <div class="loading" id="settings-loading">Loading settings...</div>
+                </div>
+            </div>
+
+            <!-- Settings Actions -->
+            <div class="modal-footer">
+                <button class="btn btn-success" onclick="saveSettings()">
+                    <i class="fas fa-save"></i> Save Settings
+                </button>
+                <button class="btn btn-secondary" onclick="loadSettings()">
+                    <i class="fas fa-sync-alt"></i> Reload
+                </button>
+                <button class="btn" onclick="resetSettings()" style="background: #dc3545;">
+                    <i class="fas fa-exclamation-triangle"></i> Reset to Defaults
+                </button>
+                <button class="btn btn-secondary" onclick="exportSettings()">
+                    <i class="fas fa-download"></i> Export
+                </button>
+                <button class="btn btn-secondary" onclick="importSettings()">
+                    <i class="fas fa-upload"></i> Import
+                </button>
+                <button class="btn btn-secondary" onclick="closeSettingsModal()">
+                    Cancel
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="/static/app.js"></script>
+</body>
+
+</html>

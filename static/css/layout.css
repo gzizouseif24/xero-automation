@@ -1,0 +1,171 @@
+/* Layout Components */
+
+/* Header */
+.header {
+    display: grid;
+    grid-template-columns: 120px 1fr 200px;
+    align-items: flex-start;
+    margin-bottom: 32px;
+    padding-bottom: 24px;
+    border: none !important;
+    border-bottom: none !important;
+    box-shadow: none !important;
+    gap: 30px;
+}
+
+.header-logo {
+    grid-column: 1;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+}
+
+.header-content {
+    grid-column: 2;
+    text-align: center;
+    justify-self: center;
+    padding-left: 20px;
+}
+
+/* Workflow Steps */
+.workflow-steps {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 32px;
+    position: relative;
+    padding: 0 25px;
+    border-top: none !important;
+    border: none !important;
+}
+
+.workflow-steps::before {
+    content: '';
+    position: absolute;
+    top: 25px;
+    left: 50px;
+    right: 50px;
+    height: 2px;
+    background: linear-gradient(90deg,
+            var(--xero-border),
+            var(--xero-blue-light),
+            var(--xero-accent),
+            var(--xero-blue-light),
+            var(--xero-border));
+    background-size: 200% 200%;
+    animation: flowLine 6s ease infinite;
+    z-index: 0;
+}
+
+@keyframes flowLine {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+.step {
+    flex: 1;
+    text-align: center;
+    position: relative;
+    z-index: 1;
+}
+
+.step-circle {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background: var(--xero-surface);
+    margin: 0 auto 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    color: var(--xero-text-secondary);
+    border: 1px solid var(--xero-border);
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 8px var(--xero-shadow);
+}
+
+.step.active .step-circle {
+    background: var(--xero-blue);
+    color: white;
+    border-color: var(--xero-blue);
+    box-shadow: 0 4px 12px rgba(25, 118, 210, 0.3);
+}
+
+.step.completed .step-circle {
+    background: var(--xero-success);
+    color: white;
+    border-color: var(--xero-success);
+    box-shadow: 0 4px 12px rgba(76, 175, 80, 0.3);
+}
+
+.step-label {
+    font-size: 0.9em;
+    color: var(--xero-text-secondary);
+    font-weight: 500;
+}
+
+/* Step Content */
+.step-content {
+    background: var(--xero-surface);
+    border: 2px solid var(--xero-border);
+    border-radius: 8px;
+    padding: 24px;
+    margin-bottom: 20px;
+    min-height: 160px;
+    width: 100%;
+    transition: all 0.3s ease;
+}
+
+/* Summary Grid */
+.summary-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 16px;
+    margin-top: 20px;
+}
+
+.summary-card {
+    background: var(--xero-surface);
+    padding: 20px;
+    border-radius: 8px;
+    text-align: center;
+    box-shadow: 0 2px 8px var(--xero-shadow);
+    border: 2px solid var(--xero-border);
+    transition: all 0.2s ease;
+}
+
+.summary-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px var(--xero-shadow);
+}
+
+.summary-card h3 {
+    color: var(--xero-blue);
+    font-size: 1.8em;
+    margin-bottom: 8px;
+    font-weight: 600;
+}
+
+.summary-card p {
+    color: var(--xero-text-secondary);
+    font-size: 0.9em;
+    font-weight: 500;
+}
+
+/* Header buttons container */
+.header-buttons {
+    grid-column: 3;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    justify-self: end;
+}

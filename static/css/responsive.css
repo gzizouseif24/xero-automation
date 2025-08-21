@@ -1,0 +1,98 @@
+/* Responsive Design */
+
+/* Settings Responsive */
+@media (max-width: 768px) {
+    .settings-tabs {
+        flex-direction: column;
+    }
+    
+    .tab-btn {
+        text-align: left;
+        border-bottom: none;
+        border-left: 3px solid transparent;
+    }
+    
+    .tab-btn.active {
+        border-bottom: none;
+        border-left-color: var(--xero-blue);
+    }
+    
+    .dict-item {
+        grid-template-columns: 1fr;
+        gap: 8px;
+    }
+    
+    .settings-actions {
+        flex-direction: column;
+    }
+}
+
+/* Modal Responsive */
+@media (max-width: 768px) {
+    .modal-content {
+        width: 95%;
+        max-height: 95%;
+    }
+
+    .modal-header,
+    .modal-body,
+    .modal-footer {
+        padding: 15px 20px;
+    }
+
+    .modal-footer {
+        flex-direction: column;
+    }
+
+    .header {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: 20px;
+    }
+
+    .settings-btn {
+        align-self: flex-end;
+    }
+    
+    h1 {
+        font-size: 1.8em;
+        flex-direction: column;
+        gap: 8px;
+    }
+    
+    .xero-logo {
+        height: 32px;
+    }
+}
+
+/* General Responsive */
+@media (max-width: 480px) {
+    .container {
+        padding: 20px;
+    }
+    
+    .workflow-steps {
+        padding: 0 10px;
+    }
+    
+    .workflow-steps::before {
+        left: 35px;
+        right: 35px;
+    }
+    
+    .step-circle {
+        width: 40px;
+        height: 40px;
+        font-size: 0.9em;
+    }
+    
+    .btn {
+        padding: 10px 16px;
+        font-size: 0.9em;
+    }
+    
+    .summary-grid {
+        grid-template-columns: 1fr;
+    }
+}
