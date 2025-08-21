@@ -45,10 +45,18 @@
     }
 
     .header {
-        flex-direction: column;
-        align-items: center;
+        grid-template-columns: 1fr;
+        grid-template-rows: auto auto auto;
+        justify-items: center;
         text-align: center;
         gap: 20px;
+    }
+    
+    .header-logo,
+    .header-content,
+    .header-buttons {
+        grid-column: 1;
+        justify-self: center;
     }
 
     .settings-btn {
@@ -68,8 +76,14 @@
 
 /* General Responsive */
 @media (max-width: 480px) {
+    body {
+        padding: 10px;
+    }
+    
     .container {
         padding: 20px;
+        width: 100%;
+        max-height: calc(100vh - 20px); /* Adjust for smaller padding on mobile */
     }
     
     .workflow-steps {

@@ -383,6 +383,63 @@ class XeroAPIClient:
         # Accept both camelCase and PascalCase variants
         return emp.get('payrollCalendarID') or emp.get('PayrollCalendarID')
     
+    def get_payroll_calendar(self, calendar_id: str) -> Dict[str, Any]:
+        """
+        Fetch payroll calendar details by ID.
+        
+        Args:
+            calendar_id: Payroll calendar ID
+            
+        Returns:
+            Payroll calendar details including pay periods
+            
+        Raises:
+            XeroAPIError: If API request fails
+        """
+        try:
+            response = self._make_request('GET', f'payroll.xro/2.0/PayrollCalendars/{calendar_id}')
+            data = response.json()
+            
+            # Handle different response structures
+            if 'payrollCalendar' in data:
+                return data['payrollCalendar']
+            elif 'PayrollCalendar' in data:
+                return data['PayrollCalendar']
+            else:
+                return data
+                
+        except (XeroAPIError, XeroAuthenticationError):
+            raise
+        except Exception as e:
+            raise XeroAPIError(f"Unexpected error fetching payroll calendar {calendar_id}: {e}")
+    
+    def get_payroll_calendars(self) -> List[Dict[str, Any]]:
+        """
+        Fetch all payroll calendars.
+        
+        Returns:
+            List of payroll calendar dictionaries
+            
+        Raises:
+            XeroAPIError: If API request fails
+        """
+        try:
+            response = self._make_request('GET', 'payroll.xro/2.0/PayrollCalendars')
+            data = response.json()
+            
+            # Handle different response structures
+            if 'payrollCalendars' in data:
+                return data['payrollCalendars']
+            elif 'PayrollCalendars' in data:
+                return data['PayrollCalendars']
+            else:
+                return data if isinstance(data, list) else []
+                
+        except (XeroAPIError, XeroAuthenticationError):
+            raise
+        except Exception as e:
+            raise XeroAPIError(f"Unexpected error fetching payroll calendars: {e}")
+    
     def get_tracking_categories(self):
         """Fetch tracking categories from Xero API"""
         try:

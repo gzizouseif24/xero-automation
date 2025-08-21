@@ -102,6 +102,7 @@ class EmployeeTimesheet:
     daily_entries: List[DailyEntry]
     pay_period_end_date: date
     xero_employee_id: Optional[str] = None
+    payroll_calendar_id: Optional[str] = None
     
     def __post_init__(self):
         """Validate data after initialization."""
@@ -156,7 +157,8 @@ class EmployeeTimesheet:
             "employee_name": self.employee_name,
             "daily_entries": [entry.to_dict() for entry in self.daily_entries],
             "pay_period_end_date": self.pay_period_end_date.isoformat(),
-            "xero_employee_id": self.xero_employee_id
+            "xero_employee_id": self.xero_employee_id,
+            "payroll_calendar_id": self.payroll_calendar_id
         }
     
     @classmethod
@@ -166,7 +168,8 @@ class EmployeeTimesheet:
             employee_name=data["employee_name"],
             daily_entries=[DailyEntry.from_dict(entry) for entry in data["daily_entries"]],
             pay_period_end_date=date.fromisoformat(data["pay_period_end_date"]),
-            xero_employee_id=data.get("xero_employee_id")
+            xero_employee_id=data.get("xero_employee_id"),
+            payroll_calendar_id=data.get("payroll_calendar_id")
         )
     
     def to_json(self) -> str:

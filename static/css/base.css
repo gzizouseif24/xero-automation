@@ -15,7 +15,11 @@ body {
     color: var(--xero-text-primary);
     transition: color 0.3s ease;
     overflow-x: hidden; /* prevent horizontal scroll */
-    overflow-y: auto; /* allow vertical scroll */
+    overflow-y: auto; /* allow vertical scroll when needed */
+    display: flex;
+    align-items: center; /* Center content vertically */
+    justify-content: center; /* Center content horizontally */
+    width: 100%;
 }
 
 @keyframes gradientShift {
@@ -54,12 +58,15 @@ body::before {
         0 0 0 1px rgba(255, 255, 255, 0.05);
     max-width: 1200px;
     width: 100%;
+    max-height: calc(100vh - 40px); /* Prevent container from exceeding viewport */
     padding: 40px;
     border: 1px solid var(--xero-border);
     transition: all 0.3s ease;
     transform: translateY(0);
     position: relative;
     backdrop-filter: blur(10px); /* Glassy effect */
+    overflow-y: auto; /* Allow scrolling within container if content is too tall */
+    flex-shrink: 0; /* Prevent container from shrinking */
 }
 
 .container:hover {
