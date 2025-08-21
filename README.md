@@ -26,20 +26,11 @@ This system takes your Excel timesheet files and automatically creates draft tim
 # Install dependencies
 pip install -r requirements.txt
 
-# Create .env file with your Xero app credentials
-echo "XERO_CLIENT_ID=your_client_id" > .env
-echo "XERO_CLIENT_SECRET=your_client_secret" >> .env
-```
 
 ### 3. Run the Application
-```bash
-python -m uvicorn src.api_server:app --reload --host 0.0.0.0 --port 8000
-```
 
 ### 4. Open in Browser
-```
-http://localhost:8000
-```
+
 
 ## Supported File Types
 
@@ -90,15 +81,6 @@ Supports `.xlsx`, `.xls` files and `.zip` archives containing multiple files.
 3. **Dry run testing** validates everything without creating actual timesheets
 4. **Submission** creates draft timesheets in Xero for final review
 
-## Configuration
-
-### Xero App Setup
-1. Go to [Xero Developer Portal](https://developer.xero.com/)
-2. Create a new app with these settings:
-   - **Redirect URI**: `http://localhost:8000/api/auth/callback`
-   - **Scopes**: `offline_access`, `payroll.employees.read`, `payroll.timesheets`
-3. Copy your Client ID and Client Secret to the `.env` file
-
 ### Business Rules
 The system includes configurable business rules:
 - **Hour capping** (default: 40 hours regular time)
@@ -106,29 +88,6 @@ The system includes configurable business rules:
 - **Overtime calculations** based on employee rates
 - **Region mapping** to Xero tracking categories
 
-## Troubleshooting
-
-### Common Issues
-
-**"Not Connected" Status**
-- Check your `.env` file has correct Xero credentials
-- Ensure redirect URI matches in Xero app settings
-- Try disconnecting and reconnecting
-
-**Employee Not Found**
-- Use the validation step to map employee names
-- Check spelling and name format in Excel files
-- Add employees to Xero if they don't exist
-
-**Region Validation Errors**
-- Ensure regions in Excel match Xero tracking categories
-- Add missing regions as tracking options in Xero
-- Use the validation report to see specific mismatches
-
-**File Upload Issues**
-- Supported formats: `.xlsx`, `.xls`, `.zip`
-- Check file isn't corrupted or password protected
-- Ensure Excel files follow expected format
 
 ## Development
 
@@ -147,16 +106,7 @@ The system includes configurable business rules:
 └── requirements.txt      # Python dependencies
 ```
 
-### Running in Development
-```bash
-# Enable debug logging
-export LOG_LEVEL=DEBUG
 
-# Run with auto-reload
-python -m uvicorn src.api_server:app --reload --port 8000
-
-# Run tests
-pytest
 ```
 
 ## API Endpoints
@@ -183,17 +133,8 @@ PUT  /api/settings             # Update settings
 ## Security
 
 - **No credentials stored** - Uses OAuth2 with encrypted token storage
-- **Environment variables** - Sensitive data in `.env` file only
 - **Secure token handling** - Automatic refresh and proper cleanup
 - **Input validation** - All uploads and data validated before processing
 
-## Support
-
-- **Documentation** - Comprehensive inline documentation
-- **Debug files** - Automatic generation in `debug_timesheet_payloads/`
-- **Error reporting** - Detailed error messages with suggested fixes
-- **Dry run testing** - Test everything before actual submission
 
 ---
-
-**Ready to automate your payroll?** Start with the Quick Start guide above! 🚀
