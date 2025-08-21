@@ -60,6 +60,7 @@ logs/
 # Temporary files
 *.tmp
 *.temp
+docs/
 
 # Debug files
 debug_*/
