@@ -60,7 +60,11 @@ logs/
 # Temporary files
 *.tmp
 *.temp
-docs */
+
 
 # Debug files
 debug_*/
+
+# Documentation (if contains sensitive info)
+docs/
+demo_files/
