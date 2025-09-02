@@ -1,5 +1,5 @@
 """
-Data models for Xero Payroll Automation system.
+Data models for Xero Payroll Automation system
 
 This module contains the core data structures used throughout the application
 for representing timesheet data, employee information, and validation results.

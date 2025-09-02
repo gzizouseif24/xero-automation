@@ -1,5 +1,5 @@
 """
-Xero API Client for Payroll Automation
+Xero API Client for Payroll Automation.
 
 This module provides a high-level interface for interacting with Xero APIs,
 specifically for payroll automation tasks including fetching employees,
